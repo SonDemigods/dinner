@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "demigods<a13752365641@126.com>",
+  "main": "index.js",
+  "scripts": {
+    "init": "node ./init/index.js",
+    "dev": "nodemon --inspect ./app",
+    "start": "nodemon --harmony ./app "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.0",
+    "koa-mysql-session": "^0.0.2",
+    "koa-router": "^7.4.0",
+    "koa-session-minimal": "^3.0.4",
+    "koa2-cors": "^2.0.6",
+    "mysql": "^2.16.0",
+    "validator": "^10.11.0"
+  }
+}
