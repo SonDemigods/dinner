@@ -5,7 +5,7 @@
  * @version V1.0.0
  */
 const config = {
-  port: 3000, // 启动端口
+  port: 2000, // 启动端口
   dataBase: { // 数据库配置
     HOST: '192.168.40.105', // 地址
     PORT: '3306', // 端口

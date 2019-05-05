@@ -72,9 +72,10 @@ module.exports = {
     let form = ctx.request.body
     let {
       pageSize,
-      current
+      current,
+      date = ''
     } = form
-    let data = await work.getWorkPage(pageSize, current)
+    let data = await work.getWorkPage(pageSize, current, date)
     ctx.body = data
   },
   /**
