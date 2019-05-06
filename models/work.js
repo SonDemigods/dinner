@@ -51,10 +51,10 @@ const work = {
   async getWorkPage(pageSize, current, date) {
     let start = pageSize * (current - 1)
     let end = pageSize * current
-    let dateSql = date === '' ? '' : `where w.date = '${date}'`
-    let _sql = `select w.*,p.name as personName,f.name as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid ${dateSql} order by id desc LIMIT ${start}, ${end}`
+    let dateSql = date === '' ? '' : `WHERE w.date = '${date}'`
+    let _sql = `SELECT w.*,p.name AS personName,f.name AS foodName FROM work w LEFT JOIN food f ON f.id = w.fid LEFT JOIN person p ON p.id = w.pid ${dateSql} ORDER BY id desc LIMIT ${start}, ${end}`
     let result = await dbUtils.query(_sql)
-    let dateSqlCount = date === '' ? '' : `where date = '${date}'`
+    let dateSqlCount = date === '' ? '' : `WHERE date = '${date}'`
     let _sqlCount = `SELECT COUNT(*) AS total FROM ${tableName} ${dateSqlCount}`
     let count = await dbUtils.query(_sqlCount)
     let returnData = await catchData.catchPage(result, current, count)

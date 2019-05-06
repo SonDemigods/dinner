@@ -114,22 +114,12 @@ module.exports = {
       date,
       remark
     } = form
-    let workData
-    if (type === '2') {
-      workData = {
-        pid,
-        type,
-        date,
-        remark
-      }
-    } else {
-      workData = {
-        pid,
-        fid,
-        type,
-        date,
-        remark
-      }
+    let workData = {
+      pid,
+      fid: type === '2' ? null : fid,
+      type,
+      date,
+      remark
     }
     let data = await work.modifyWork(workData, id)
     ctx.body = data
