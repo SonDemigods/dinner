@@ -38,6 +38,12 @@ const work = {
     let returnData = await catchData.catchData(result)
     return returnData
   },
+  async getWorkListByNameId(data) {
+    let _sql = 'select w.*,p.name as personName,f.`name` as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid where w.pid = ' + data.nameId
+    let result = await dbUtils.query(_sql)
+    let returnData = await catchData.catchData(result)
+    return returnData
+  },
   /**
    * @functionName getWorkPage
    * @param {Number} pageSize 分页条数

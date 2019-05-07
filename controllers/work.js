@@ -59,6 +59,11 @@ module.exports = {
     let data = await work.getWorkList(form)
     ctx.body = data
   },
+  async getWorkListByNameId(ctx) {
+    let form = ctx.request.body
+    let data = await work.getWorkListByNameId(form)
+    ctx.body = data
+  },
   /**
    * @functionName getWorkPage
    * @param {Object} ctx 查询条件

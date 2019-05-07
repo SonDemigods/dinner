@@ -10,6 +10,7 @@ const work = require('../controllers/work')
 
 module.exports = router.post('/creatWork', work.creatWork)
   .post('/getWorkList', work.getWorkList)
+  .post('/getWorkListByNameId', work.getWorkListByNameId)
   .post('/getWorkPage', work.getWorkPage)
   .post('/getWork', work.getWork)
   .post('/modifyWork', work.modifyWork)

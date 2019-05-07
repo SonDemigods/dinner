@@ -33,6 +33,10 @@ const work = {
     let resultData = await workModel.getWorkList(data)
     return resultData
   },
+  async getWorkListByNameId(data) {
+    let resultData = await workModel.getWorkListByNameId(data)
+    return resultData
+  },
   /**
    * @functionName getWorkPage
    * @param {Number} pageSize 分页条数
