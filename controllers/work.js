@@ -26,9 +26,10 @@ module.exports = {
       remark
     } = form
     let workData
-    if (type === '2') {
+    if (type === '1') {
       workData = {
         pid,
+        fid,
         type,
         date,
         remark
@@ -36,7 +37,6 @@ module.exports = {
     } else {
       workData = {
         pid,
-        fid,
         type,
         date,
         remark
