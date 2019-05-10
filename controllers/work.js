@@ -78,9 +78,11 @@ module.exports = {
     let {
       pageSize,
       current,
-      date = ''
+      date = '',
+      pid = ''
     } = form
-    let data = await work.getWorkPage(pageSize, current, date)
+    console.info(`getWorkPage pid ${pid}`)
+    let data = await work.getWorkPage(pageSize, current, date, pid)
     ctx.body = data
   },
   /**

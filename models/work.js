@@ -6,6 +6,8 @@
  */
 const dbUtils = require('../utils/db')
 const catchData = require('../utils/catchData')
+const logger = require('koa-logger')
+
 const tableName = 'work'
 
 const work = {
@@ -39,7 +41,7 @@ const work = {
     return returnData
   },
   async getWorkListByNameId(data) {
-    let _sql = 'select w.*,p.name as personName,f.`name` as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid where w.pid = ' + data.nameId
+    let _sql = `select w.*,p.name as personName,f.name as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid where w.pid = ${data.nameId}`
     let result = await dbUtils.query(_sql)
     let returnData = await catchData.catchData(result)
     return returnData
@@ -54,16 +56,21 @@ const work = {
    * @date 2019-04-10 09:16:07
    * @version V1.0.0
    */
-  async getWorkPage(pageSize, current, date) {
+  async getWorkPage(pageSize, current, date, pid) {
     let start = pageSize * (current - 1)
     let end = pageSize * current
     let dateSql = date === '' ? '' : `WHERE w.date = '${date}'`
-    let _sql = `SELECT w.*,p.name AS personName,f.name AS foodName FROM work w LEFT JOIN food f ON f.id = w.fid LEFT JOIN person p ON p.id = w.pid ${dateSql} ORDER BY id desc LIMIT ${start}, ${end}`
+    let pidSql = pid === '' ? '' : `WHERE p.id = '${pid}'`
+    let _sql = `SELECT w.*,p.name AS personName,f.name AS foodName FROM work w LEFT JOIN food f ON f.id = w.fid LEFT JOIN person p ON p.id = w.pid ${dateSql}${pidSql} ORDER BY id desc LIMIT ${start}, ${end}`
+    // console.info(`_sql: ${_sql}`)
     let result = await dbUtils.query(_sql)
     let dateSqlCount = date === '' ? '' : `WHERE date = '${date}'`
-    let _sqlCount = `SELECT COUNT(*) AS total FROM ${tableName} ${dateSqlCount}`
+    let pidSqlCount = pid === '' ? '' : (dateSql === '' ? `WHERE pid = '${pid}'` : ``)
+    let _sqlCount = `SELECT COUNT(*) AS total FROM ${tableName} ${dateSqlCount}${pidSqlCount}`
     let count = await dbUtils.query(_sqlCount)
+
     let returnData = await catchData.catchPage(result, current, count)
+
     return returnData
   },
   /**

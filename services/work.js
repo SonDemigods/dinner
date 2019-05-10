@@ -47,8 +47,8 @@ const work = {
    * @date 2019-04-10 09:16:07
    * @version V1.0.0
    */
-  async getWorkPage(pageSize, current, date) {
-    let resultData = await workModel.getWorkPage(pageSize, current, date)
+  async getWorkPage(pageSize, current, date, pid) {
+    let resultData = await workModel.getWorkPage(pageSize, current, date, pid)
     return resultData
   },
   /**
