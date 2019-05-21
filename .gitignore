@@ -6,3 +6,5 @@ config\.js
 app\.js
 
 package-lock\.json
+
+\.vscode/

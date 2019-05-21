@@ -27,17 +27,19 @@ const work = {
   },
   /**
    * @functionName getWorkList
-   * @param {Object} data 查找条件
+   * @param {String} start 开始时间
+   * @param {String} end 结束时间
    * @return {Object|null} 返回结果
-   * @description 查找用户列表
+   * @description 查找工作列表
    * @author 张航
    * @date 2019-04-10 09:16:07
    * @version V1.0.0
    */
-  async getWorkList(data) {
-    let _sql = 'select w.*,p.name as personName,f.`name` as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid'
+  async getWorkList(start, end) {
+    let date = `where w.date between '${start}' and '${end}'`
+    let _sql = `select w.*,p.name as personName,f.name as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid ${date}`
     let result = await dbUtils.query(_sql)
-    let returnData = await catchData.catchData(result)
+    let returnData = await catchData.handWorkList(result)
     return returnData
   },
   async getWorkListByNameId(data) {
@@ -61,7 +63,7 @@ const work = {
     let end = pageSize * current
     let dateSql = date === '' ? '' : `WHERE w.date = '${date}'`
     let pidSql = pid === '' ? '' : `WHERE p.id = '${pid}'`
-    let _sql = `SELECT w.*,p.name AS personName,f.name AS foodName FROM work w LEFT JOIN food f ON f.id = w.fid LEFT JOIN person p ON p.id = w.pid ${dateSql}${pidSql} ORDER BY id desc LIMIT ${start}, ${end}`
+    let _sql = `SELECT w.*,p.name AS personName,f.name AS foodName FROM work w LEFT JOIN food f ON f.id = w.fid LEFT JOIN person p ON p.id = w.pid ${dateSql} ${pidSql} ORDER BY id desc LIMIT ${start}, ${end}`
     // console.info(`_sql: ${_sql}`)
     let result = await dbUtils.query(_sql)
     let dateSqlCount = date === '' ? '' : `WHERE date = '${date}'`

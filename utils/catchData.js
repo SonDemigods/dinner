@@ -28,7 +28,39 @@ let catchPage = function (data, current, total) {
   return result
 }
 
+let handWorkList = function (data) {
+  data.map(item => {
+    switch (item.type) {
+      case 1:
+        item.typeText = '集体'
+        break;
+      case 2:
+        item.typeText = '个人'
+        break;
+      default:
+        item.typeText = '无'
+        break;
+    }
+    switch (item.invoiceType) {
+      case 1:
+        item.invoiceTypeText = '定额'
+        break;
+      case 2:
+        item.invoiceTypeText = '机打'
+        break;
+      case 3:
+        item.invoiceTypeText = '电子'
+        break;
+      default:
+        item.invoiceTypeText = '无'
+        break;
+    }
+  })
+  return data
+}
+
 module.exports = {
   catchData,
-  catchPage
+  catchPage,
+  handWorkList
 }

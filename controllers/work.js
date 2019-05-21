@@ -56,7 +56,11 @@ module.exports = {
    */
   async getWorkList(ctx) {
     let form = ctx.request.body
-    let data = await work.getWorkList(form)
+    let {
+      start,
+      end
+    } = form
+    let data = await work.getWorkList(start, end)
     ctx.body = data
   },
   async getWorkListByNameId(ctx) {
@@ -144,10 +148,12 @@ module.exports = {
     let form = ctx.request.body
     let {
       id,
-      leave
+      leave,
+      invoiceType
     } = form
     let data = await work.modifyWork({
-      leave
+      leave,
+      invoiceType
     }, id)
     ctx.body = data
   },

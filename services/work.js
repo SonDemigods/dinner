@@ -22,15 +22,16 @@ const work = {
   },
   /**
    * @functionName getWorkList
-   * @param {Object} data 查找条件
+   * @param {String} start 开始时间
+   * @param {String} end 结束时间
    * @return {Object|null} 返回结果
    * @description 查找工作列表
    * @author 张航
    * @date 2019-04-10 09:16:07
    * @version V1.0.0
    */
-  async getWorkList(data) {
-    let resultData = await workModel.getWorkList(data)
+  async getWorkList(start, end) {
+    let resultData = await workModel.getWorkList(start, end)
     return resultData
   },
   async getWorkListByNameId(data) {
