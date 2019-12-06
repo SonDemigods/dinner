@@ -63,9 +63,19 @@ module.exports = {
     let data = await work.getWorkList(start, end)
     ctx.body = data
   },
-  async getWorkListByNameId(ctx) {
+  /**
+   * @functionName getWorkListByPersonId
+   * @param {Object} ctx 查询条件
+   * @return {Object|null} 返回结果
+   * @description 根据人员id查找工作列表
+   * @author 张航
+   * @date 2019-04-10 09:16:07
+   * @version V1.0.0
+   */
+  async getWorkListByPersonId(ctx) {
     let form = ctx.request.body
-    let data = await work.getWorkListByNameId(form)
+    let pid = form.pid
+    let data = await work.getWorkListByPersonId(pid)
     ctx.body = data
   },
   /**

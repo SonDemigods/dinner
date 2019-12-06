@@ -34,8 +34,17 @@ const work = {
     let resultData = await workModel.getWorkList(start, end)
     return resultData
   },
-  async getWorkListByNameId(data) {
-    let resultData = await workModel.getWorkListByNameId(data)
+  /**
+   * @functionName getWorkListByPersonId
+   * @param {String} pid 人员id
+   * @return {Object|null} 返回结果
+   * @description 根据人员id查找工作列表
+   * @author 张航
+   * @date 2019-04-10 09:16:07
+   * @version V1.0.0
+   */
+  async getWorkListByPersonId(pid) {
+    let resultData = await workModel.getWorkListByPersonId(pid)
     return resultData
   },
   /**

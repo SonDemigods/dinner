@@ -42,8 +42,17 @@ const work = {
     let returnData = await catchData.handWorkList(result)
     return returnData
   },
-  async getWorkListByNameId(data) {
-    let _sql = `select w.*,p.name as personName,f.name as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid where w.pid = ${data.nameId}`
+  /**
+   * @functionName getWorkListByPersonId
+   * @param {String} pid 人员id
+   * @return {Object|null} 返回结果
+   * @description 根据人员id查找工作列表
+   * @author 张航
+   * @date 2019-04-10 09:16:07
+   * @version V1.0.0
+   */
+  async getWorkListByPersonId(pid) {
+    let _sql = `select w.*,p.name as personName,f.name as foodName from work w LEFT JOIN food f on f.id = w.fid LEFT JOIN person p on p.id = w.pid where w.pid = ${pid}`
     let result = await dbUtils.query(_sql)
     let returnData = await catchData.catchData(result)
     return returnData
